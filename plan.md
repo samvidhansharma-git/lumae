@@ -1,41 +1,35 @@
-# Class Quest — Implementation Plan
+# Lumae — implementation plan
 
 ## Product
-A polished, responsive, game-like teacher appreciation website inspired by the supplied 157-slide HTML course deck. It turns the curriculum into a playable memory trail that makes the teacher feel the student listened to every class.
+Lumae is a privacy-first voice-memory command center for the hackathon's Privacy-first Knowledge Systems track. It must show a credible Omi → Qdrant → Lyzr loop, let someone ask a grounded question, expose observable workflow traces, and remain runnable in demo mode without private credentials.
 
-## Design direction
-- **Design movement:** Cinematic editorial UI crossed with a soft retro game HUD — like a treasured field notebook upgraded into a constellation map.
-- **Core principles:** sincere over flashy; progress should feel earned; every interaction should teach or recall one useful HTML idea; delight comes from layered micro-details, not noise.
-- **Color philosophy:** deep ink/navy creates a quiet “after class” atmosphere; warm paper/cream keeps the tribute human; electric lime is the ownable signal for completed knowledge; coral and sky blue add playful checkpoint accents.
-- **Layout paradigm:** a split-screen command deck on desktop: narrative/quest copy at left, interactive checkpoint panel at right, with an orbital route/timeline beneath. On mobile, it becomes a stacked journey with a persistent HUD.
-- **Signature elements:** a lime “knowledge pulse” line connecting checkpoints; paper-card surfaces with tiny registration marks; a compact XP HUD that behaves like a game save file.
-- **Interaction philosophy:** every click should visibly acknowledge learning. Completed checkpoints unlock with a short pulse, XP increments, and the quest log updates. Quiz feedback explains the why, not just right/wrong.
-- **Animation:** restrained 180–700ms transitions; gentle constellation drift; checkpoint pulse and XP count-up; all motion disabled/reduced under `prefers-reduced-motion`.
-- **Typography:** Fraunces for heartfelt display headlines and DM Sans for UI/body copy; uppercase micro-labels use generous tracking.
-- **Brand essence:** “A playable thank-you note built from every lesson.” Personality: attentive, luminous, warm.
-- **Brand voice:** reflective, clever, never generic. Example lines: “You didn’t just attend class. You left breadcrumbs.” / “Every tag remembered is a small way of saying: I was there.”
-- **Wordmark / mark:** a small four-point “spark cursor” inside a rounded square, paired with the Class Quest wordmark.
-- **Signature brand color:** knowledge lime `#d8f36a`.
+## Design
+- **Design movement:** dark editorial control room crossed with a quiet observatory.
+- **Core principles:** signal over noise; privacy is visible; every system step is explainable; warmth belongs in the typography, not the chrome.
+- **Color philosophy:** near-black gives the user's memories visual gravity; acid lime marks permission and readiness; coral, blue, green, and violet identify the three integrations and activity types.
+- **Layout paradigm:** asymmetric command center: a narrow identity rail, a narrative hero, metric band, then a left-to-right systems trace that resolves into a large ask surface.
+- **Signature elements:** orbital signal visualization; tiny mono telemetry labels; paper query card with a lime shadow; status markers that make backend work visible.
+- **Interaction philosophy:** actions acknowledge the system state immediately, show the route the data took, and never hide whether the experience is demo or live.
+- **Animation:** slow orbital drift and signal pulses; short node trace animation; all motion collapses under `prefers-reduced-motion`.
+- **Typography:** Instrument Serif for human questions and answers; DM Sans for UI hierarchy; DM Mono for telemetry and integration labels.
+- **Brand essence:** a private signal layer for the thoughts you do not want to lose. Personality: observant, calm, exact.
+- **Brand voice:** specific, unhurried, lightly poetic. Example lines: “Turn ambient thought into searchable signal.” / “Context first. Confidence second.”
+- **Wordmark & logo:** a rotated rounded square containing three rising signal bars, paired with the lowercase `lumae` wordmark.
+- **Signature brand color:** knowledge lime `#d4f36a`.
 
-## Implementation approach
-- Use a no-build, dependency-light static web app served on port 3000.
-- `index.html` provides semantic structure, metadata, skip link, HUD, quest map, lesson panel, quiz panel, final tribute panel, and accessible live regions.
-- `styles.css` owns responsive layout, card styling, HUD visuals, motion, focus states, reduced-motion behavior, and the notebook/constellation aesthetic.
-- `app.js` owns checkpoint data, progress/XP state, lesson rendering, quiz feedback, keyboard-friendly controls, replay/reset, toast feedback, and final reveal.
-- `public/manus-routes.json` declares the single-page route manifest required by Webdev.
-- `app.config.ts` provides a literal project logo URL for checkpoint metadata.
-
-## Curriculum translation
-The 157-slide deck is condensed into 8 quest checkpoints: foundations, semantics, text + lists, links + media, tables + forms, accessibility + SEO, practice labs, and final quiz/glossary. Each checkpoint has a short “remembered lesson,” one small interactive action, and one quiz question.
-
-The course-profile DOCX adds a separate study area for Modules I–IV. It provides four selectable learning shelves, with every syllabus topic rendered as its own labelled study card: web/HTML/CSS foundations and text styling; CSS backgrounds, box model, viewport, rulesets, classes, and Bootstrap; Flexbox, Bootstrap layout/utilities, images, margins, attributes, lists, anchors, and hyperlinks; and HTML5 multimedia plus semantic elements. A separate module-wise quiz room has its own four module tabs, eight questions per module (32 total), immediate explanations, retry states, score/progress, and independent switching. This study area is intentionally separate from the original quick quiz.
-
-After a perfect 32/32 module score, a certificate gate unlocks a structured details form for the learner’s full name, teacher’s name, class/institution, and personal note. Those values render into the on-page certificate and self-contained downloadable HTML certificate, alongside the issue date, score, course topics, and Class Quest identity, and remain available for print.
+## Implementation
+- Static HTML/CSS/JS frontend with no build dependency.
+- Vercel serverless functions under `api/` for health, ask, and both Omi webhook routes.
+- Deterministic 384-dimension hashing embedder keeps the integration self-contained and matches the Qdrant collection contract in the guide.
+- Qdrant Cloud is used when `QDRANT_URL` is present; otherwise the API returns safe demo context.
+- Lyzr Agent Studio is called when `LYZR_API_KEY` and `LYZR_AGENT_ID` are present; otherwise the API returns a grounded, keyword-routed demo answer.
+- Frontend always renders the answer's source mode and context chips.
 
 ## Project structure
-- `index.html` — accessible page shell and all regions.
-- `styles.css` — visual system and responsive behavior.
-- `app.js` — quest state, interactions, original quiz, detailed Modules I–IV learning content, module quiz data, feedback, and progress.
-- `public/manus-routes.json` — route declaration.
-- `app.config.ts` — project metadata.
-- `plan.md` / `TODO.md` — approved implementation notes and outcome criteria.
+
+- `index.html` — semantic page shell, product copy, query UI, and accessible live regions.
+- `styles.css` — visual system, responsive states, focus treatment, and reduced motion.
+- `app.js` — capture simulation, query flow, trace animation, activity feed, and privacy reset.
+- `api/_lib/memory.mjs` — vector memory boundary and provider adapters.
+- `api/omi/*` — webhook adapters for Omi payloads.
+- `README.md` — setup, architecture, API, privacy, and submission details.

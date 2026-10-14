@@ -1,0 +1,2 @@
+import { remember, extractText } from '../_lib/memory.mjs';
+export default async function handler(req,res){ if(req.method!=='POST') return res.status(405).json({error:'Method not allowed'}); const uid=String(req.query?.uid||'anonymous'); const payload=typeof req.body==='string'?JSON.parse(req.body||'{}'):req.body||{}; const text=extractText(payload); const result=await remember(uid,text,'conversation'); return res.status(200).json({status:'ok',stored:Boolean(result.stored),mode:result.mode}); }

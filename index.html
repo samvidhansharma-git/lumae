@@ -1,182 +1,47 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#101826" />
-    <meta name="description" content="A playable thank-you note built from every HTML lesson." />
-    <title>Class Quest — A Tribute to Every Lesson</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet" />
-    <link rel="icon" href="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/2728.svg" />
-    <link rel="stylesheet" href="/styles.css" />
-  </head>
-  <body>
-    <a class="skip-link" href="#main-content">Skip to the quest</a>
-    <div class="ambient ambient-one" aria-hidden="true"></div>
-    <div class="ambient ambient-two" aria-hidden="true"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0a0b0d" />
+  <meta name="description" content="Lumae is a privacy-first voice memory command center powered by Omi, Qdrant, and Lyzr." />
+  <title>Lumae — Voice memory, made legible</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to workspace</a>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Primary navigation">
+      <div class="brand-lockup"><div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div><div><span class="brand-name">lumae</span><span class="brand-note">private memory OS</span></div></div>
+      <div class="sidebar-rule"></div>
+      <nav class="nav-list">
+        <a class="nav-item active" href="#overview"><span class="nav-icon">◒</span><span>Overview</span><span class="nav-count">01</span></a>
+        <a class="nav-item" href="#memory"><span class="nav-icon">◌</span><span>Memory atlas</span><span class="nav-count" id="navMemoryCount">27</span></a>
+        <a class="nav-item" href="#orchestration"><span class="nav-icon">⌘</span><span>Agent graph</span><span class="nav-count">03</span></a>
+        <a class="nav-item" href="#webhooks"><span class="nav-icon">↗</span><span>Omi webhooks</span><span class="nav-count live-count">LIVE</span></a>
+      </nav>
+      <div class="sidebar-bottom"><div class="privacy-card"><div class="privacy-top"><span class="status-dot"></span><span>Privacy boundary</span><span class="lock">⌑</span></div><p>Your memories stay scoped to your workspace. Nothing is used for training.</p><button class="text-button" id="forgetAll" type="button">Forget demo memories <span>↗</span></button></div><div class="user-chip"><div class="avatar">AS</div><div><strong>Aria Shah</strong><span>solo workspace</span></div><button class="icon-button" aria-label="Workspace settings" type="button">···</button></div></div>
+    </aside>
 
-    <header class="site-header" aria-label="Class Quest status">
-      <a class="brand" href="#top" aria-label="Class Quest home">
-        <span class="brand-mark" aria-hidden="true"><span></span></span>
-        <span>class<span class="brand-accent">/</span>quest</span>
-      </a>
-      <div class="header-status">
-        <div class="streak" title="Your current class streak">
-          <span class="status-dot" aria-hidden="true"></span>
-          <span><b id="streakCount">01</b> class streak</span>
-        </div>
-        <button class="text-button" id="restartTop" type="button">Restart quest <span aria-hidden="true">↗</span></button>
-      </div>
-    </header>
+    <main id="main" class="main-content">
+      <header class="topbar"><div class="breadcrumbs"><span>WORKSPACE</span><b>/</b><strong>ARIA'S SIGNAL</strong></div><div class="topbar-actions"><span class="sync-label"><span class="status-dot"></span><span id="syncStatus">all systems nominal</span></span><button class="icon-button search-trigger" aria-label="Search memories" type="button">⌕</button><button class="help-button" type="button">?</button></div></header>
 
-    <main id="main-content">
-      <section class="hero shell" id="top" aria-labelledby="hero-title">
-        <div class="hero-copy">
-          <p class="eyebrow"><span class="eyebrow-line" aria-hidden="true"></span> a playable thank-you note</p>
-          <h1 id="hero-title">You didn’t just attend class.<br /><em>You left breadcrumbs.</em></h1>
-          <p class="hero-intro">A small quest built from every tag, lab, and “remember this” moment in your HTML journey — so your teacher can see just how much you were listening.</p>
-          <div class="hero-actions">
-            <button class="primary-button" id="beginQuest" type="button">Begin the quest <span aria-hidden="true">→</span></button>
-            <button class="ghost-button" id="skipIntro" type="button">Skip to checkpoints</button>
-          </div>
-          <div class="hero-note"><span class="note-pin" aria-hidden="true">✦</span><span><b>157 slides remembered</b><br />8 checkpoints waiting</span></div>
-        </div>
-        <div class="hero-orbit" aria-hidden="true">
-          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div>
-          <div class="orbit-core"><span class="core-spark">✦</span><span class="core-label">HTML<br />JOURNEY</span></div>
-          <span class="orbit-node node-one">&lt;main&gt;</span><span class="orbit-node node-two">alt</span><span class="orbit-node node-three">#id</span><span class="orbit-node node-four">&lt;form&gt;</span>
-          <div class="orbit-caption">every class<br /><span>left a trace</span></div>
-        </div>
-      </section>
+      <section class="hero" id="overview"><div class="hero-copy"><div class="eyebrow"><span class="eyebrow-line"></span>VOICE MEMORY / 001</div><h1>Turn ambient thought<br />into <em>searchable signal.</em></h1><p class="hero-lede">Lumae catches the moments between meetings, remembers what matters, and lets a small team of agents turn them into the next right move.</p><div class="hero-actions"><button class="primary-button" id="captureButton" type="button"><span class="button-pulse"></span>Simulate Omi capture <span>↗</span></button><button class="secondary-button" id="howItWorks" type="button">See the loop <span>↓</span></button></div><div class="hero-caption"><span class="caption-mark">✳</span><span>Built for the <strong>Privacy-first knowledge systems</strong> track.<br />Your voice is the interface. Your memory is yours.</span></div></div><div class="signal-visual" aria-label="Animated signal visualization" role="img"><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="orbit orbit-c"></div><div class="signal-core"><span class="core-waves"></span><span class="core-label">LISTENING<br /><b>READY</b></span></div><div class="signal-tag tag-top">OMI / AMBIENT INPUT</div><div class="signal-tag tag-right">MEMORY / 384D</div><div class="signal-tag tag-bottom">REASONING / 03 AGENTS</div><div class="signal-star star-one">✦</div><div class="signal-star star-two">+</div><div class="signal-star star-three">✳</div></div></section>
 
-      <section class="quest-section shell" id="quest" aria-labelledby="quest-title">
-        <div class="section-heading">
-          <div><p class="eyebrow">01 / the map</p><h2 id="quest-title">The class quest</h2></div>
-          <div class="progress-panel" aria-label="Quest progress">
-            <div class="progress-label"><span>knowledge collected</span><strong id="progressText">0 / 8</strong></div>
-            <div class="progress-track"><span id="progressBar"></span></div>
-          </div>
-        </div>
-        <div class="quest-layout">
-          <div class="quest-intro">
-            <p class="section-lede">Eight moments from the deck. Eight chances to prove that the details stuck.</p>
-            <p class="tiny-copy">Choose any glowing checkpoint. Complete it to earn XP and reveal the next piece of the tribute.</p>
-            <div class="xp-card">
-              <span class="xp-kicker">current save file</span>
-              <div class="xp-row"><strong id="xpValue">000</strong><span>XP</span><span class="xp-level" id="levelText">listener / level 01</span></div>
-              <div class="xp-meter"><span id="xpBar"></span></div>
-            </div>
-            <div class="legend"><span><i class="legend-dot available"></i> available</span><span><i class="legend-dot done"></i> remembered</span></div>
-          </div>
-          <div class="map-card">
-            <div class="map-grid" aria-label="Interactive HTML lesson checkpoints" role="list">
-              <button class="checkpoint is-active" data-index="0" type="button" role="listitem"><span class="checkpoint-number">01</span><span class="checkpoint-icon">⌘</span><span class="checkpoint-name">Foundations</span><span class="checkpoint-status">start here</span></button>
-              <span class="map-connector connector-a" aria-hidden="true"></span>
-              <button class="checkpoint" data-index="1" type="button" role="listitem"><span class="checkpoint-number">02</span><span class="checkpoint-icon">◇</span><span class="checkpoint-name">Semantics</span><span class="checkpoint-status">locked by wonder</span></button>
-              <span class="map-connector connector-b" aria-hidden="true"></span>
-              <button class="checkpoint" data-index="2" type="button" role="listitem"><span class="checkpoint-number">03</span><span class="checkpoint-icon">Aa</span><span class="checkpoint-name">Text & lists</span><span class="checkpoint-status">locked by wonder</span></button>
-              <span class="map-connector connector-c" aria-hidden="true"></span>
-              <button class="checkpoint" data-index="3" type="button" role="listitem"><span class="checkpoint-number">04</span><span class="checkpoint-icon">↗</span><span class="checkpoint-name">Links & media</span><span class="checkpoint-status">locked by wonder</span></button>
-              <span class="map-connector connector-d" aria-hidden="true"></span>
-              <button class="checkpoint" data-index="4" type="button" role="listitem"><span class="checkpoint-number">05</span><span class="checkpoint-icon">▦</span><span class="checkpoint-name">Tables & forms</span><span class="checkpoint-status">locked by wonder</span></button>
-              <span class="map-connector connector-e" aria-hidden="true"></span>
-              <button class="checkpoint" data-index="5" type="button" role="listitem"><span class="checkpoint-number">06</span><span class="checkpoint-icon">◌</span><span class="checkpoint-name">A11Y & SEO</span><span class="checkpoint-status">locked by wonder</span></button>
-              <span class="map-connector connector-f" aria-hidden="true"></span>
-              <button class="checkpoint" data-index="6" type="button" role="listitem"><span class="checkpoint-number">07</span><span class="checkpoint-icon">✎</span><span class="checkpoint-name">Practice lab</span><span class="checkpoint-status">locked by wonder</span></button>
-              <span class="map-connector connector-g" aria-hidden="true"></span>
-              <button class="checkpoint" data-index="7" type="button" role="listitem"><span class="checkpoint-number">08</span><span class="checkpoint-icon">✦</span><span class="checkpoint-name">The reveal</span><span class="checkpoint-status">locked by wonder</span></button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <section class="stats-row" aria-label="Workspace statistics"><div class="stat-card stat-featured"><div class="stat-label">MEMORIES INDEXED <span>↗</span></div><div class="stat-value" id="memoryCount">27</div><div class="stat-meta"><span class="trend-up">+4 this week</span><span>across 06 topics</span></div><div class="mini-bars" aria-hidden="true"><i style="height:35%"></i><i style="height:54%"></i><i style="height:46%"></i><i style="height:72%"></i><i style="height:62%"></i><i style="height:88%"></i><i style="height:78%"></i><i style="height:100%"></i></div></div><div class="stat-card"><div class="stat-label">RETRIEVAL PRECISION <span class="info-dot">i</span></div><div class="stat-value">84<span class="stat-unit">%</span></div><div class="stat-meta"><span class="trend-up">+8.2%</span><span>vs. last 30 days</span></div><div class="stat-line"><span style="width:84%"></span></div></div><div class="stat-card"><div class="stat-label">AGENTS IN ORBIT <span class="info-dot">i</span></div><div class="stat-value">03</div><div class="stat-meta"><span class="agent-live"><i></i>all responding</span><span>manager + 2 workers</span></div><div class="agent-avatars"><span class="agent-avatar coral">M</span><span class="agent-avatar blue">S</span><span class="agent-avatar green">P</span><span class="agent-more">+0</span></div></div></section>
 
-      <section class="lesson-section shell" id="lesson" aria-labelledby="lesson-title">
-        <div class="lesson-shell">
-          <div class="lesson-aside">
-            <p class="eyebrow">active checkpoint <span id="activeIndex">01</span></p>
-            <div class="lesson-stamp" id="lessonStamp">START HERE</div>
-            <p class="lesson-aside-copy" id="asideCopy">Before the tags, there was a page waiting to be understood.</p>
-            <div class="lesson-rule" aria-hidden="true"></div>
-            <p class="lesson-micro"><span class="micro-dot"></span> no account needed<br /><span class="micro-dot"></span> progress saves in this tab</p>
-          </div>
-          <article class="lesson-card">
-            <div class="lesson-card-top"><span class="lesson-kicker" id="lessonKicker">HTML / 01</span><span class="lesson-xp" id="lessonXp">+40 XP</span></div>
-            <h2 id="lesson-title">The page has a skeleton.</h2>
-            <p class="lesson-summary" id="lessonSummary">You remembered that every page starts with a quiet promise: doctype, html, head, body. Structure first. Magic second.</p>
-            <div class="lesson-memory" id="lessonMemory"><div class="memory-label">teacher’s note / remembered</div><p>“A browser builds a DOM tree from your markup. That means order matters.”</p></div>
-            <div class="lesson-action" id="lessonAction"></div>
-            <div class="lesson-footer"><span id="lessonFootnote">Tap the small action above to mark this lesson remembered.</span><button class="next-button" id="nextCheckpoint" type="button">Next checkpoint <span aria-hidden="true">→</span></button></div>
-          </article>
-        </div>
-      </section>
+      <section class="workspace-grid" id="orchestration"><div class="panel loop-panel"><div class="panel-heading"><div><div class="eyebrow small"><span class="eyebrow-line"></span>THE CONNECTED LOOP</div><h2>From voice to next move.</h2></div><span class="panel-status"><i></i> live trace</span></div><div class="loop-canvas"><div class="loop-line line-1"></div><div class="loop-line line-2"></div><div class="loop-line line-3"></div><div class="loop-node omi-node"><div class="node-orb">◉</div><div class="node-copy"><strong>Omi</strong><span>ambient voice</span></div><small>01 / CAPTURE</small></div><div class="loop-node qdrant-node"><div class="node-orb">◈</div><div class="node-copy"><strong>Qdrant</strong><span>semantic memory</span></div><small>02 / RETRIEVE</small></div><div class="loop-node lyzr-node"><div class="node-orb">✦</div><div class="node-copy"><strong>Lyzr</strong><span>agent reasoning</span></div><small>03 / ORCHESTRATE</small></div><div class="trace-packet packet-a"></div><div class="trace-packet packet-b"></div><div class="trace-packet packet-c"></div></div><div class="loop-footer"><span>Every step is observable.</span><button class="text-button" id="traceButton" type="button">Run a trace <span>↗</span></button></div></div><div class="panel activity-panel" id="webhooks"><div class="panel-heading"><div><div class="eyebrow small"><span class="eyebrow-line"></span>OBSERVABILITY</div><h2>Signal activity</h2></div><button class="filter-button" id="filterButton" type="button">last 24h⌄</button></div><div class="activity-feed" id="activityFeed" aria-live="polite"><div class="activity-item"><span class="activity-marker coral"></span><div><strong>Conversation indexed</strong><p>“Planning the Q4 community dinner…”</p><small>just now · Omi webhook</small></div><span class="activity-arrow">↗</span></div><div class="activity-item"><span class="activity-marker blue"></span><div><strong>3 memories retrieved</strong><p>Query: “What did we decide about guests?”</p><small>12 min ago · Qdrant</small></div><span class="activity-arrow">↗</span></div><div class="activity-item"><span class="activity-marker green"></span><div><strong>Plan agent completed</strong><p>Next step drafted with 2 owners</p><small>38 min ago · Lyzr</small></div><span class="activity-arrow">↗</span></div><div class="activity-item"><span class="activity-marker violet"></span><div><strong>Memory boundary checked</strong><p>Workspace scope confirmed</p><small>1 hr ago · Lumae</small></div><span class="activity-arrow">↗</span></div></div><button class="activity-more" id="activityMore" type="button">View all activity <span>↗</span></button></div></section>
 
-      <section class="modules-section shell" id="modules" aria-labelledby="modules-title">
-        <div class="modules-heading"><div><p class="eyebrow">02 / study trail</p><h2 id="modules-title">Learn the modules<br /><em>topic by topic.</em></h2></div><p>Built from the official Fundamentals of Web Development course profile. Each module is a study shelf: every syllabus topic gets its own clear card before you move to the separate assessment zone.<br /><strong>Built by KSH Sankeerthan · CSE AI/ML</strong></p></div>
-        <div class="module-tabs" role="tablist" aria-label="Modules 1 to 4">
-          <button class="module-tab is-active" type="button" role="tab" aria-selected="true" data-module="0"><span>01</span> Web + HTML</button>
-          <button class="module-tab" type="button" role="tab" aria-selected="false" data-module="1"><span>02</span> CSS styling</button>
-          <button class="module-tab" type="button" role="tab" aria-selected="false" data-module="2"><span>03</span> Flexbox + Bootstrap</button>
-          <button class="module-tab" type="button" role="tab" aria-selected="false" data-module="3"><span>04</span> Multimedia</button>
-        </div>
-        <article class="module-learning-card" id="moduleLearning" aria-live="polite"></article>
-      </section>
+      <section class="query-section" id="memory"><div class="query-intro"><div class="eyebrow"><span class="eyebrow-line"></span>ASK THE ATLAS</div><h2>What do you<br /><em>remember?</em></h2><p>Ask in your own words. Lumae retrieves the closest voice fragments, then gives its reasoning agents only the context they need.</p><div class="query-meta"><span><i class="status-dot"></i> grounded answers</span><span>scope: aria's signal</span></div></div><div class="query-card"><div class="query-card-top"><span>MEMORY QUERY / <b id="queryId">0007</b></span><span class="privacy-pill">⌑ PRIVATE CONTEXT</span></div><label class="sr-only" for="questionInput">Ask your memory</label><textarea id="questionInput" rows="2" placeholder="Ask your memory something… e.g. What did I promise Rahul this week?"></textarea><div class="query-suggestions"><button type="button" data-query="What are my open action items?">open action items</button><button type="button" data-query="What did I decide about the community dinner?">community dinner</button><button type="button" data-query="Who owns the invoice follow-up?">find an owner</button></div><div class="query-submit-row"><span class="query-hint"><kbd>⌘</kbd><kbd>↵</kbd> to ask</span><button class="primary-button compact" id="askButton" type="button">Ask the atlas <span>↗</span></button></div><div class="answer-area" id="answerArea" aria-live="polite"><div class="answer-placeholder"><span class="placeholder-star">✦</span><span>Your grounded answer will appear here.<br /><small>Context first. Confidence second.</small></span></div></div></div></section>
 
-      <section class="module-quiz-section shell" id="module-quiz" aria-labelledby="module-quiz-title">
-        <div class="module-quiz-intro"><p class="eyebrow">03 / module quizzes</p><h2 id="module-quiz-title">Prove the<br /><em>details stuck.</em></h2><p>This is a separate assessment room. Choose one module at a time, answer all eight questions, read the explanation, and return later without losing your place.</p><div class="module-quiz-score"><span>course quiz score</span><strong id="moduleQuizScore">0 / 32</strong></div><div class="certificate-gate"><span class="module-label">final reward</span><p id="certificateHint">Answer all 32 module questions correctly to unlock your certificate.</p><button class="certificate-button" id="certificateButton" type="button" disabled>Certificate locked <span aria-hidden="true">✦</span></button></div></div>
-        <div class="module-quiz-card">
-          <div class="module-quiz-tabs" role="tablist" aria-label="Separate module quizzes">
-            <button class="module-quiz-tab is-active" type="button" role="tab" aria-selected="true" data-quiz-module="0"><span>01</span> Web + HTML</button>
-            <button class="module-quiz-tab" type="button" role="tab" aria-selected="false" data-quiz-module="1"><span>02</span> CSS styling</button>
-            <button class="module-quiz-tab" type="button" role="tab" aria-selected="false" data-quiz-module="2"><span>03</span> Flexbox + Bootstrap</button>
-            <button class="module-quiz-tab" type="button" role="tab" aria-selected="false" data-quiz-module="3"><span>04</span> Multimedia</button>
-          </div>
-          <div class="module-quiz-top"><span id="moduleQuizLabel">MODULE 01 / 08 QUESTIONS</span><span id="moduleQuizProgress">01 / 08</span></div>
-          <h3 id="moduleQuizQuestion">Loading the module question…</h3>
-          <div class="module-answer-grid" id="moduleAnswerGrid"></div>
-          <div class="module-quiz-feedback" id="moduleQuizFeedback" role="status" aria-live="polite"></div>
-          <button class="module-quiz-next" id="moduleQuizNext" type="button" disabled>Next module question <span aria-hidden="true">→</span></button>
-        </div>
-      </section>
-
-      <section class="certificate-section shell" id="certificateSection" aria-labelledby="certificate-title" hidden>
-        <div class="certificate-details-panel">
-          <div><p class="eyebrow">04 / certificate details</p><h2>Put your name<br /><em>on the learning.</em></h2><p>Enter the details exactly as you want them printed. Your certificate stays in this browser session and can be updated before printing or downloading.</p></div>
-          <form class="certificate-details-form" id="certificateDetailsForm">
-            <label><span>Full name <b aria-hidden="true">*</b></span><input id="certificateName" name="certificateName" type="text" autocomplete="name" placeholder="Your full name" required maxlength="80" /></label>
-            <label><span>Teacher’s name</span><input id="certificateTeacher" name="certificateTeacher" type="text" autocomplete="off" placeholder="Teacher who guided the class" maxlength="80" /></label>
-            <label><span>Class / institution</span><input id="certificateClass" name="certificateClass" type="text" autocomplete="organization" placeholder="Class, school, or institution" maxlength="100" /></label>
-            <label class="certificate-note-field"><span>Personal note</span><textarea id="certificateNote" name="certificateNote" rows="3" maxlength="180" placeholder="A short line to remember this journey"></textarea></label>
-            <button class="primary-button" type="submit">Update my certificate <span aria-hidden="true">✦</span></button>
-            <p class="certificate-form-status" id="certificateFormStatus" role="status" aria-live="polite"></p>
-          </form>
-        </div>
-        <div class="certificate-preview" id="certificatePreview"><div class="certificate-border"><p class="certificate-overline">CLASS QUEST / FUNDAMENTALS OF WEB DEVELOPMENT</p><div class="certificate-spark" aria-hidden="true">✦</div><p class="certificate-label">certificate of attentive learning</p><h2 id="certificate-title">This certifies that</h2><p class="certificate-recipient" id="certificateRecipient">Your name</p><p class="certificate-subline">was present for every detail, every question, and every lesson.</p><p class="certificate-body" id="certificateBody">For successfully completing all four module quizzes and demonstrating confident recall of HTML, CSS, Flexbox, Bootstrap, and HTML5 multimedia foundations.</p><p class="certificate-note" id="certificatePreviewNote"></p><div class="certificate-meta"><span><b id="certificateDate">08 OCT 2026</b><small>issued today</small></span><span><b>32 / 32</b><small>module quiz score</small></span><span><b id="certificateTeacherPrint">Teacher guided the class</b><small>with gratitude to</small></span><span><b id="certificateClassPrint">Class Quest</b><small>class / institution</small></span></div></div></div>
-        <div class="certificate-actions"><button class="primary-button" id="downloadCertificate" type="button">Download certificate <span aria-hidden="true">↓</span></button><button class="ghost-button" id="printCertificate" type="button">Print certificate</button></div>
-      </section>
-
-      <section class="quiz-section shell" id="quiz" aria-labelledby="quiz-title">
-        <div class="quiz-heading"><p class="eyebrow">04 / quick quiz</p><h2 id="quiz-title">A little proof<br /><em>you were listening.</em></h2><p>Not an exam. Just a handful of “I remember that!” moments, with explanations worth keeping.</p></div>
-        <div class="quiz-card">
-          <div class="quiz-meta"><span>question <b id="quizNumber">01</b> / 04</span><span class="quiz-score" id="quizScore">0 correct</span></div>
-          <h3 id="quizQuestion">Which tag gives the main navigation its meaning?</h3>
-          <div class="answer-grid" id="answerGrid"></div>
-          <div class="quiz-feedback" id="quizFeedback" role="status" aria-live="polite"></div>
-          <button class="quiz-next" id="quizNext" type="button" disabled>Next question <span aria-hidden="true">→</span></button>
-        </div>
-      </section>
-
-      <section class="tribute-section shell" id="tribute" aria-labelledby="tribute-title">
-        <div class="tribute-card">
-          <div class="tribute-art" aria-hidden="true"><span class="star star-a">✦</span><span class="star star-b">✧</span><span class="star star-c">✦</span><div class="tribute-orbit"></div><div class="tribute-core">&lt;/&gt;</div></div>
-          <div class="tribute-copy"><p class="eyebrow">03 / final unlock</p><h2 id="tribute-title">A final note<br /><em>is waiting.</em></h2><p id="tributeMessage">Complete all eight checkpoints to unlock the tribute message — every remembered detail adds one more line.</p><div class="tribute-signature"><span class="signature-line"></span><span>with gratitude, from your student</span></div><button class="primary-button" id="replayQuest" type="button">Restart the quest <span aria-hidden="true">↗</span></button></div>
-        </div>
-      </section>
+      <section class="memory-strip"><div class="strip-heading"><div class="eyebrow small"><span class="eyebrow-line"></span>RECENTLY REMEMBERED</div><button class="text-button" id="showAllMemories" type="button">open atlas <span>↗</span></button></div><div class="memory-cards" id="memoryCards"><article class="memory-card"><div class="memory-card-top"><span class="memory-type coral-dot">CONVERSATION</span><span>2m ago</span></div><h3>Q4 community dinner</h3><p>Venue shortlist is down to The Glasshouse and Linden Hall.</p><div class="memory-card-footer"><span class="memory-tag">#events</span><span class="confidence">92% match</span></div></article><article class="memory-card"><div class="memory-card-top"><span class="memory-type blue-dot">ACTION ITEM</span><span>1d ago</span></div><h3>Invoice follow-up</h3><p>Send the revised invoice to Rahul before Friday afternoon.</p><div class="memory-card-footer"><span class="memory-tag">#finance</span><span class="confidence">88% match</span></div></article><article class="memory-card"><div class="memory-card-top"><span class="memory-type green-dot">DECISION</span><span>2d ago</span></div><h3>Research sprint scope</h3><p>Keep the first sprint narrow: activation, not retention.</p><div class="memory-card-footer"><span class="memory-tag">#product</span><span class="confidence">81% match</span></div></article></div></section>
+      <footer class="site-footer"><div><span class="footer-mark">✳</span> lumae / voice memory, made legible</div><div><span>OMI CONNECTED</span><span>QDRANT READY</span><span>LYZR READY</span></div><div>build 0.4.1 · <button id="healthButton" type="button">system health</button></div></footer>
     </main>
-
-    <footer class="site-footer shell"><span>class<span class="brand-accent">/</span>quest · built from 157 remembered slides</span><span>HTML is a language. Listening is a practice.</span></footer>
-    <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="/app.js" defer></script>
-  </body>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="/app.js" type="module"></script>
+</body>
 </html>

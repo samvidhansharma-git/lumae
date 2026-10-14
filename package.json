@@ -1,8 +1,7 @@
 {
-  "name": "class-quest",
+  "name": "lumae-voice-memory",
   "version": "1.0.0",
   "private": true,
-  "scripts": {
-    "start": "node server.mjs"
-  }
+  "type": "module",
+  "scripts": { "start": "node server.mjs" }
 }
